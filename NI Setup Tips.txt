@@ -1,0 +1,6 @@
+1. Add merge modules in setup
+2. For attention to : niMetaUtils.msm
+	Any deployment project that contains the niMetaUtils.msm merge module must include a SystemFolder entry and a ProgramFilesFolder entry in the Directory Table. To include this entry in Visual Studio, add a "System Folder" and a "Program Files Folder" as a Special Folder in the File System view of the deployment project. 
+3. For add .net framework in setup
+	Add prerequisites in set up project, in property setting
+
