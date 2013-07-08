@@ -54,8 +54,8 @@ namespace DaqApplication
             }
         }
 
-        
 
+        private int _AveragedCount = 0;
         private TaskSetting _Setting;
         private System.Diagnostics.Stopwatch _ElapseTime;
         private List<List<double>> _Maxes = new List<List<double>>();
@@ -153,6 +153,8 @@ namespace DaqApplication
         {
             NationalInstruments.AnalogWaveform<double>[] acquiredData = e.GetData();
 
+            _AveragedCount++;
+
             double interval = 1.0 / _Setting.SampleRate;
             System.Threading.Tasks.Parallel.For(0, 2, i =>
                 {
@@ -243,6 +245,8 @@ namespace DaqApplication
                     max = ArrayOperation.Sum1D(_Maxes[i].ToArray());
                     max /= _Maxes[i].Count;
                     _Maxes[i][0] = max;
+
+                    _Average[i] /= _AveragedCount;
                 }
 
 
@@ -365,6 +369,7 @@ namespace DaqApplication
             _WaveformData.Clear();
 
             _LastIndex = 0;
+            _AveragedCount = 0;
         }
 
         private void useChannel1ToolStripMenuItem_Click(object sender, EventArgs e)
